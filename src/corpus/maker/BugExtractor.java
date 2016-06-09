@@ -87,6 +87,7 @@ public class BugExtractor {
 		String xmlFileName="show_bug_plat_UI_Closed_fixed_1938_1stJan2005_to_31stDec2005.xml";
 		int year=2005;
 		new BugExtractor(xmlFileName, year).extractBugReports();
+		//This is a simple change to the fine.
 
 	}
 
