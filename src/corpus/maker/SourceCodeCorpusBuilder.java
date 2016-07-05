@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import utility.ContentLoader;
 import utility.ContentWriter;
-import config.StaticInfo;
+import config.StaticData;;
 
 public class SourceCodeCorpusBuilder {
 
@@ -17,8 +17,8 @@ public class SourceCodeCorpusBuilder {
 	
 	public SourceCodeCorpusBuilder()
 	{
-		this.sourceCodeFolder=StaticInfo.SOURCECODEDIR;
-		this.sourceCodePPFolder=StaticInfo.PROCESSEDSOURCECODEDIR;
+		this.sourceCodeFolder=StaticData.SOURCECODEDIR;
+		this.sourceCodePPFolder=StaticData.PREPROCESSEDSOURCECODEDIR+"/"+"ProcessedFiles";
 		this.javaFilePaths=new ArrayList<String>();
 		this.javaFilePathsLastName=new ArrayList<String>();
 		this.noOfFile=0;
@@ -59,6 +59,7 @@ public class SourceCodeCorpusBuilder {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		new SourceCodeCorpusBuilder().createPreprocessedRepo();
+		//This is a simple change.
 	}
 
 }

@@ -15,7 +15,17 @@ public class MiscUtility {
 	public static String list2Str(ArrayList<String> list) {
 		String content = new String();
 		for (String word : list) {
-			content += word + ",";
+			if(word!=" ")
+				{
+					if(word!="\n")
+					{
+						content += word+ " ";
+					}
+					else
+					{
+						content += word + "";
+					}
+				}
 		}
 		return content.trim();
 	}

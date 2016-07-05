@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-
-import config.StaticInfo;
+import stemmer.Stemmer;
+import config.StaticData;
 import utility.ContentLoader;
 import utility.MiscUtility;
 
@@ -24,13 +24,13 @@ public class SourceCodePreprocessor {
 	}
 
 	public void loadStopWords() {
-		this.stopwords = ContentLoader.readContent(StaticInfo.STOPWORDFILE);
+		this.stopwords = ContentLoader.readContent(StaticData.STOPWORDFILE);
 	}
 
 	protected ArrayList<String> removeStopWords(ArrayList<String> words) {
 		ArrayList<String> refined = new ArrayList<String>(words);
 		for (String word : words) {
-			if (this.stopwords.contains(word.toLowerCase())) {
+			if (this.stopwords.contains(word)) {
 				refined.remove(word);
 			}
 		}

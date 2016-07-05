@@ -2,41 +2,97 @@ package utility;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
-import config.StaticInfo;
+import java.util.ArrayList;
 
 public class ContentWriter {
+	public static boolean writeContent(String outFile, ArrayList<String> items) {
+		// writing content to output
+		boolean written = false;
+		try {
+			FileWriter fwriter = new FileWriter(new File(outFile));
+			for (String item : items) {
+				fwriter.write(item);
+			}
+			fwriter.close();
+			written = true;
+
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		return written;
+	}
+
+	public static boolean appendContent(String outFile, ArrayList<String> items) {
+		// writing content to output
+		boolean written = false;
+		try {
+			FileWriter fwriter = new FileWriter(new File(outFile), true);
+			for (String item : items) {
+				fwriter.write(item + "\n");
+			}
+			fwriter.close();
+			written = true;
+
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		return written;
+	}
+
+	public static boolean writeContentInt(String outFile,
+			ArrayList<Integer> items) {
+		// writing content to output
+		boolean written = false;
+		try {
+			FileWriter fwriter = new FileWriter(new File(outFile));
+			for (Integer item : items) {
+				fwriter.write(item + "\n");
+			}
+			fwriter.close();
+			written = true;
+
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		return written;
+	}
+
+	public static boolean appendContentInt(String outFile,
+			ArrayList<Integer> items) {
+		// writing content to output
+		boolean written = false;
+		try {
+			FileWriter fwriter = new FileWriter(new File(outFile), true);
+			for (Integer item : items) {
+				fwriter.write(item + "\n");
+			}
+			fwriter.close();
+			written = true;
+
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
+		return written;
+	}
 
 	public static void writeContent(String outFile, String content) {
-		// save the content
 		try {
 			FileWriter fwriter = new FileWriter(new File(outFile));
 			fwriter.write(content);
 			fwriter.close();
-
 		} catch (Exception exc) {
-
 			exc.printStackTrace();
 		}
+	}
 
+	public static void appendContent(String outFile, String content) {
+		try {
+			FileWriter fwriter = new FileWriter(new File(outFile), true);
+			fwriter.write(content+"\n");
+			fwriter.close();
+		} catch (Exception exc) {
+			exc.printStackTrace();
+		}
 	}
-	
-	
-	public static void writeToFileforHashMapContent(String outfile, String additionalFileName, HashMap hm)
-	{
-		String content="";
-		Iterator it = hm.entrySet().iterator();
-	    while (it.hasNext()) {
-	        Map.Entry pair = (Map.Entry)it.next();
-	        String filePath=pair.getKey().toString();
-	        String rVSMscore=pair.getValue().toString();
-	        content+=filePath+","+rVSMscore+"\r\n";
-	    }
-	    utility.ContentWriter.writeContent(outfile+"/"+additionalFileName, content);
-	}
-	
 
 }

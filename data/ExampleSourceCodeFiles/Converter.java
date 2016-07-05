@@ -1,0 +1,2 @@
+/Users/user/eclipse.platform.ui/bundles/org.eclipse.core.databinding/src/org/eclipse/core/databinding/conversion/Converter.java
+copyright corporation all rights reserved this program accompanying materials terms eclipse public license accompanies distribution http eclipse org legal epl html contributors corporation initial implementation org eclipse core databinding conversion abstract base converters converter converter object type object type param type param type converter object type object type type type type type override object from type type override object type type

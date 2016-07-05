@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Locale;
 
 import stemmer.Stemmer;
-import config.StaticInfo;
+import config.StaticData;
 import utility.ContentLoader;
 import utility.MiscUtility;
 
@@ -23,7 +23,7 @@ public class BugReportPreprocessor {
 	}
 
 	protected void loadStopWords() {
-		this.stopwords = ContentLoader.readContent(StaticInfo.STOPWORDFILE);
+		this.stopwords = ContentLoader.readContent(StaticData.STOPWORDFILE);
 	}
 
 	protected ArrayList<String> removeStopWords(ArrayList<String> words) {
@@ -38,6 +38,7 @@ public class BugReportPreprocessor {
 
 	protected ArrayList<String> splitContent(String content) {
 		String[] words = content.split("\\s+|\\p{Punct}+|\\d+");
+		//String[] words = content.split("\\s+|\\p{Punct}+|\\d+");
 		return new ArrayList<String>(Arrays.asList(words));
 	}
 
@@ -45,12 +46,25 @@ public class BugReportPreprocessor {
 		return stemmer.stripAffixes(word);
 		//return word;
 	}
+	
+	protected ArrayList<String> splitLines(String content)
+	{
+		String[] contentByLine=content.split("\\r?\\n");
+		return new ArrayList<String>(Arrays.asList(contentByLine));
+	}
 
 	public String performNLP() {
 		// performing NLP operations
-		ArrayList<String> words = splitContent(this.content);
-		ArrayList<String> refined = removeStopWords(words);
+		ArrayList<String> lineOfContent=splitLines(content);
 		ArrayList<String> stemmed = new ArrayList<String>();
+		for (String indLine : lineOfContent) 
+		{
+			
+		ArrayList<String> words = splitContent(indLine);
+		//ArrayList<String> words = splitContent(this.content);
+		ArrayList<String> refined = removeStopWords(words);
+		//ArrayList<String> stemmed = new ArrayList<String>();
+		int found=0;
 		for (String word : refined) {
 			if (!word.trim().isEmpty()) {
 				String stemmedWord = performStemming(word.trim());
@@ -59,11 +73,16 @@ public class BugReportPreprocessor {
 					stemmedWord=stemmedWord.trim();
 					stemmedWord=stemmedWord.replaceAll("“", "");
 					stemmedWord=stemmedWord.replaceAll("”", "");
-					stemmed.add(stemmedWord);
+					if(!stemmedWord.isEmpty())
+						{
+							stemmed.add(stemmedWord.trim());
+							found=1;
+						}
+					}
 				}
 			}
+		if(found>0)stemmed.add("\n");
 		}
-
 		return MiscUtility.list2Str(stemmed);
 
 	}
