@@ -12,8 +12,8 @@ import config.StaticData;
 public class AdjacentListMaker {
 
 	String title;
-	HashMap<String, ArrayList<String>> adjacentMap;
-	HashMap<String, ArrayList<Integer>> token2BugMap;
+	public HashMap<String, ArrayList<String>> adjacentMap;
+	public HashMap<String, ArrayList<Integer>> token2BugMap;
 	int windowSize = 2;
 	boolean extended = false;
 
@@ -151,7 +151,7 @@ public class AdjacentListMaker {
 		return wordList.toArray(new String[wordList.size()]);
 	}
 
-	protected void makeAdjacentList() {
+	public void makeAdjacentList() {
 		// preparing word adjacent list
 		try {
 			Scanner scanner = new Scanner(new File(this.title));
@@ -187,6 +187,7 @@ public class AdjacentListMaker {
 		int count = 0;
 		for (String key : this.adjacentMap.keySet()) {
 			System.out.println(key + ":" + this.adjacentMap.get(key));
+			System.out.println(key + ":" + token2BugMap.get(key) );
 			count++;
 			// if(count==200)break;
 		}
